@@ -1,6 +1,6 @@
 # Project: fdlibm
 
-CC = gcc.exe
+CC = gcc
 
 JS_SRCDIR = js/src
 JS_OBJECTS = \
@@ -50,9 +50,9 @@ js\src\jsautokw.h:
 ifeq ($(wildcard js),)
 	$(error JS source directory not found. Extract $(wildcard js-*.tar.gz) tarball using tool of your choice. Possible options are 7z, WinRAR, WinZip.)
 endif
-	$(CC) -o jskwgen js/src/jskwgen.c
+	$(HOSTCC) -o jskwgen js/src/jskwgen.c
 	jskwgen > js/src/jsautokw.h
-	rm jskwgen.exe
+	rm jskwgen
 	
 js.lib: js\src\jsautokw.h $(JS_OBJECTS)
 	ar r js.lib $(JS_OBJECTS)
